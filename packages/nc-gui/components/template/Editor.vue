@@ -65,7 +65,7 @@ const { addTab } = useTabs()
 
 const { sqlUis, project, loadTables } = useProject()
 
-const sqlUi = ref(meta.value?.base_id ? sqlUis.value[meta.value?.base_id] : sqlUis.value[0])
+const sqlUi = ref(meta.value?.base_id ? sqlUis.value[meta.value?.base_id] : Object.values(sqlUis.value)[0])
 
 const hasSelectColumn = ref<boolean[]>([])
 
