@@ -394,14 +394,14 @@ watch(
           <thead>
             <tr class="nc-grid-header border-1 bg-gray-100 sticky top[-1px]">
               <th>
-                <div class="w-full h-full bg-gray-100 flex min-w-[70px] pl-5 pr-1 items-center">
+                <div class="w-full h-full bg-gray-100 flex min-w-[70px] pl-5 pr-1 items-center" pw-data="nc-check-all">
                   <template v-if="!readOnly">
                     <div class="nc-no-label text-gray-500" :class="{ hidden: selectedAllRecords }">#</div>
                     <div
                       :class="{ hidden: !selectedAllRecords, flex: selectedAllRecords }"
                       class="nc-check-all w-full items-center"
                     >
-                      <a-checkbox v-model:checked="selectedAllRecords" />
+                      <a-checkbox v-model:checked="selectedAllRecords" pw-data="nc-check-all-checkbox" />
 
                       <span class="flex-1" />
                     </div>
@@ -459,8 +459,8 @@ watch(
           <tbody ref="tbodyEl" @selectstart.prevent>
             <LazySmartsheetRow v-for="(row, rowIndex) of data" ref="rowRefs" :key="rowIndex" :row="row">
               <template #default="{ state }">
-                <tr class="nc-grid-row">
-                  <td key="row-index" class="caption nc-grid-cell pl-5 pr-1">
+                <tr class="nc-grid-row" :data-pw="`grid-row-${rowIndex}`">
+                  <td key="row-index" class="caption nc-grid-cell pl-5 pr-1" :pw-data="`cell-id-${rowIndex}`">
                     <div class="items-center flex gap-1 min-w-[55px]">
                       <div
                         v-if="!readOnly || !isLocked"
@@ -477,7 +477,12 @@ watch(
                         <a-checkbox v-model:checked="row.rowMeta.selected" />
                       </div>
                       <span class="flex-1" />
-                      <div v-if="!readOnly && !isLocked" class="nc-expand" :class="{ 'nc-comment': row.rowMeta?.commentCount }">
+                      <div
+                        v-if="!readOnly && !isLocked"
+                        class="nc-expand"
+                        :pw-data="`nc-expand-${rowIndex}`"
+                        :class="{ 'nc-comment': row.rowMeta?.commentCount }"
+                      >
                         <span
                           v-if="row.rowMeta?.commentCount"
                           class="py-1 px-3 rounded-full text-xs cursor-pointer select-none transform hover:(scale-110)"
