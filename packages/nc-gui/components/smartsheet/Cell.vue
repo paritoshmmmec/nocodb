@@ -70,7 +70,9 @@ provide(EditModeInj, useVModel(props, 'editEnabled', emit))
 
 provide(ActiveCellInj, active)
 
-provide(ReadonlyInj, readOnly.value)
+if (readOnly?.value) {
+  provide(ReadonlyInj, readOnly.value)
+}
 
 const isForm = inject(IsFormInj, ref(false))
 
@@ -123,7 +125,10 @@ const syncAndNavigate = (dir: NavigateDir, e: KeyboardEvent) => {
 <template>
   <div
     class="nc-cell w-full"
-    :class="[`nc-cell-${(column?.uidt || 'default').toLowerCase()}`, { 'text-blue-600': isPrimary(column) && !virtual && !isForm }]"
+    :class="[
+      `nc-cell-${(column?.uidt || 'default').toLowerCase()}`,
+      { 'text-blue-600': isPrimary(column) && !virtual && !isForm },
+    ]"
     @keydown.enter.exact="syncAndNavigate(NavigateDir.NEXT, $event)"
     @keydown.shift.enter.exact="syncAndNavigate(NavigateDir.PREV, $event)"
   >
