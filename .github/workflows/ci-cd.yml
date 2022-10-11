@@ -816,7 +816,7 @@ jobs:
           run: npx playwright install --with-deps
         - name: Run Playwright tests
           working-directory: ./scripts/playwright
-          run: npx playwright test --workers=2
+          run: npm run ci-test-mysql
         - uses: actions/upload-artifact@v2
           if: always()
           with:
