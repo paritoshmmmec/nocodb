@@ -72,6 +72,7 @@ p {
     @apply w-full rounded p-2 min-h-[40px] flex items-center border-solid border-1 border-gray-300 dark:border-slate-200;
 
     input,
+    textarea,
     &.nc-virtual-cell,
     > div {
       @apply bg-white dark:(bg-slate-500 text-white);
@@ -82,6 +83,18 @@ p {
 
       .chip {
         @apply dark:(bg-slate-700 text-white);
+      }
+    }
+
+    &.nc-cell-longtext {
+      @apply !p-0 pb-2px pr-2px;
+    }
+
+    textarea {
+      @apply px-4 py-2 rounded;
+
+      &:focus {
+        box-shadow: none !important;
       }
     }
   }
